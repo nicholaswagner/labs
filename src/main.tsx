@@ -6,7 +6,6 @@ import "@radix-ui/themes/styles.css";
 import "./main.css";
 
 import { ThemeProvider } from "./components/ui/ThemeContext";
-// import { LilGuiProvider } from "./components/ui/lil-gui-provider/LilGuiProvider";
 import { routeTree } from "./routeTree.gen";
 
 const router = createRouter({ routeTree, basepath: import.meta.env.BASE_URL });

@@ -175,7 +175,7 @@ export const Snark = () => {
 						/>
 					)}
 				</Canvas>
-				{tweakables.showSnark && (
+				{/* {tweakables.showSnark && (
 					<Flex className={styles.Hero}>
 						<Flex direction="column">
 							<Heading
@@ -190,7 +190,7 @@ export const Snark = () => {
 							</Heading>
 						</Flex>
 					</Flex>
-				)}
+				)} */}
 			</Flex>
 		</Flex>
 	);
