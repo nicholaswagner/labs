@@ -26,7 +26,7 @@ jobs:
               # Build the  app 
             - name: Build app
               env:
-                  VITE_BASE_URL: /quickstart/
+                  VITE_BASE_URL: /labs/
               working-directory: ${{ github.workspace }}
               run: npm run build:gh-pages
 
