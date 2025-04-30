@@ -1,14 +1,18 @@
-import { Flex, Heading } from "@radix-ui/themes";
+import { Box, Flex, Heading } from "@radix-ui/themes";
 import { AsciiRenderer } from "@react-three/drei";
 import { Canvas, type ThreeElements, useFrame } from "@react-three/fiber";
 import { useLocation } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { Mesh } from "three";
 import { debounce } from "../../utils/debounce";
+import { useScrambleText } from "../hooks/useScrambleText";
 import { useLilGui } from "../ui/lil-gui-provider/LilGuiProvider";
+import { ScrambleText } from "../ui/scramble-text/ScrambleText";
 import styles from "./snark.module.css";
 
 export const Snark = () => {
+	// const headerRef = useRef<HTMLElement | null>(null);
+
 	const location = useLocation();
 	const devToolsEnabled = location.searchStr.includes("devtools");
 
@@ -35,6 +39,15 @@ export const Snark = () => {
 	);
 
 	const { gui } = devToolsEnabled ? useLilGui() : { gui: null };
+
+	// const scramble = useScrambleText(headerRef, {
+	// 	autoPlay: true,
+	// 	delay: 500,
+	// 	interval: 50,
+	// 	duration: 1200,
+	// 	easing: "easeInOut",
+	// 	// chars: "!@#$%^&*()_+=-ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+	// });
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: <No need, this is for debugging>
 	useEffect(() => {
@@ -175,22 +188,37 @@ export const Snark = () => {
 						/>
 					)}
 				</Canvas>
-				{/* {tweakables.showSnark && (
+				{tweakables.showSnark && (
 					<Flex className={styles.Hero}>
 						<Flex direction="column">
-							<Heading
-								size={{ initial: "6", sm: "8", md: "9" }}
-								align={{ initial: "center", sm: "left" }}
-								weight="bold"
+							<Box
+								style={{
+									textAlign: "start",
+									// width: "80%",
+									// height: "80%",
+								}}
 							>
-								<mark>
-									“Code reviews aren’t for finding bugs. They’re for shared
-									suffering and slowly losing faith in your coworkers. ”
-								</mark>
-							</Heading>
+								<Heading
+									size={{ initial: "6", sm: "8", md: "9" }}
+									align={{ initial: "center", sm: "left" }}
+									weight="bold"
+								>
+									<mark>
+										<ScrambleText
+											style={{
+												paddingLeft: "1rem",
+												paddingRight: "1rem",
+												textWrap: "nowrap",
+											}}
+										>
+											Welcome to the labs
+										</ScrambleText>
+									</mark>
+								</Heading>
+							</Box>
 						</Flex>
 					</Flex>
-				)} */}
+				)}
 			</Flex>
 		</Flex>
 	);

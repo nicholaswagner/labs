@@ -10,6 +10,7 @@ import {
 } from "@radix-ui/themes";
 
 import { dependencies, devDependencies, homepage } from "../../package.json";
+import { ScrambleText } from "./ui/scramble-text/ScrambleText";
 
 const deps = Object.keys(dependencies);
 const devDeps = Object.keys(devDependencies);
@@ -37,7 +38,7 @@ export const PackageDetails = () => {
 	);
 
 	return (
-		<Grid columns={{ initial: "1", md: "2" }} gap="5">
+		<Grid columns={{ initial: "1", md: "2" }}>
 			<Flex direction="column">
 				<Heading size="4" mb="2" align={{ initial: "center", md: "left" }}>
 					Yet another{" "}
@@ -49,14 +50,20 @@ export const PackageDetails = () => {
 				<Text weight="light" size="2" align={{ initial: "center", md: "left" }}>
 					There are many like it, but this one is mine.
 				</Text>
-				<Separator orientation="horizontal" size="4" my="5" />⠀
 			</Flex>
-			<Flex direction="column">
-				<Text mb="8" align={{ initial: "center", md: "left" }}>
-					If you're curious, here's what's in the current{" "}
-					<Link href={`${homepage}/blob/main/package.json`}>package.json</Link>
-				</Text>
 
+			<Flex direction="column" align={{ initial: "center", md: "start" }}>
+				<Flex direction="column" px={{ initial: "2" }}>
+					<ScrambleText align={{ initial: "center", md: "left" }}>
+						The following are updated with each commit
+					</ScrambleText>
+					<Link href={`${homepage}/blob/main/package.json`} mb="4">
+						<ScrambleText align={{ initial: "center", md: "left" }}>
+							package.json
+						</ScrambleText>
+					</Link>
+				</Flex>
+				<Separator orientation="horizontal" size="4" my="5" />⠀ ⠀
 				<Grid columns="2" gap="7">
 					{buildTable("dependencies", deps)}
 					{buildTable("devDependencies", devDeps)}

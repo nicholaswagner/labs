@@ -1,23 +1,31 @@
-import { Separator } from "@radix-ui/themes";
+import { Flex } from "@radix-ui/themes";
 import { createFileRoute } from "@tanstack/react-router";
-import { PackageDetails } from "../components/PackageDetails";
-import { Snark } from "../components/Snark/Snark";
+
+import { ASCII1 } from "../components/labs/ASCII1";
+import { ScrambleText } from "../components/ui/scramble-text/ScrambleText";
 
 export const Route = createFileRoute("/_/$")({
 	component: RouteComponent,
 });
 
-/**
- *
- * Think of this as the catch-all 'homepage' template that uses the catch-all layout template.
- */
-
 function RouteComponent() {
 	return (
 		<>
-			<Snark />
-			<Separator orientation="horizontal" size="4" my="5" />
-			<PackageDetails />
+			<Flex direction="column" height="100vh" align="center" justify="center">
+				<ScrambleText
+					style={{
+						fontFamily: "monospace",
+						textTransform: "uppercase",
+						userSelect: "none",
+						backgroundColor: "var(--accent-5)",
+						paddingLeft: "2rem",
+						paddingRight: "2rem",
+					}}
+				>
+					access denied
+				</ScrambleText>
+			</Flex>
+			<ASCII1 />
 		</>
 	);
 }

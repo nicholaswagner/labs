@@ -13,6 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as Import } from './routes/_'
 import { Route as TemplatesSplatImport } from './routes/templates/$'
+import { Route as Bos04Import } from './routes/bos/04'
 import { Route as SplatImport } from './routes/_.$'
 
 // Create/Update Routes
@@ -25,6 +26,12 @@ const Route = Import.update({
 const TemplatesSplatRoute = TemplatesSplatImport.update({
   id: '/templates/$',
   path: '/templates/$',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const Bos04Route = Bos04Import.update({
+  id: '/bos/04',
+  path: '/bos/04',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -52,6 +59,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SplatImport
       parentRoute: typeof rootRoute
     }
+    '/bos/04': {
+      id: '/bos/04'
+      path: '/bos/04'
+      fullPath: '/bos/04'
+      preLoaderRoute: typeof Bos04Import
+      parentRoute: typeof rootRoute
+    }
     '/templates/$': {
       id: '/templates/$'
       path: '/templates/$'
@@ -77,12 +91,14 @@ const RouteWithChildren = Route._addFileChildren(RouteChildren)
 export interface FileRoutesByFullPath {
   '': typeof RouteWithChildren
   '/$': typeof SplatRoute
+  '/bos/04': typeof Bos04Route
   '/templates/$': typeof TemplatesSplatRoute
 }
 
 export interface FileRoutesByTo {
   '': typeof RouteWithChildren
   '/$': typeof SplatRoute
+  '/bos/04': typeof Bos04Route
   '/templates/$': typeof TemplatesSplatRoute
 }
 
@@ -90,25 +106,28 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/_': typeof RouteWithChildren
   '/_/$': typeof SplatRoute
+  '/bos/04': typeof Bos04Route
   '/templates/$': typeof TemplatesSplatRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '' | '/$' | '/templates/$'
+  fullPaths: '' | '/$' | '/bos/04' | '/templates/$'
   fileRoutesByTo: FileRoutesByTo
-  to: '' | '/$' | '/templates/$'
-  id: '__root__' | '/_' | '/_/$' | '/templates/$'
+  to: '' | '/$' | '/bos/04' | '/templates/$'
+  id: '__root__' | '/_' | '/_/$' | '/bos/04' | '/templates/$'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   Route: typeof RouteWithChildren
+  Bos04Route: typeof Bos04Route
   TemplatesSplatRoute: typeof TemplatesSplatRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   Route: RouteWithChildren,
+  Bos04Route: Bos04Route,
   TemplatesSplatRoute: TemplatesSplatRoute,
 }
 
@@ -123,6 +142,7 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/_",
+        "/bos/04",
         "/templates/$"
       ]
     },
@@ -135,6 +155,9 @@ export const routeTree = rootRoute
     "/_/$": {
       "filePath": "_.$.tsx",
       "parent": "/_"
+    },
+    "/bos/04": {
+      "filePath": "bos/04.tsx"
     },
     "/templates/$": {
       "filePath": "templates/$.tsx"

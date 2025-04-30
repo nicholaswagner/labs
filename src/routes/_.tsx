@@ -16,8 +16,8 @@ export const Route = createFileRoute("/_")({
 function RouteComponent() {
 	return (
 		<>
-			<Container size="3">
-				<Nav />
+			<Nav />
+			<Container size="4">
 				<Outlet />
 			</Container>
 		</>
