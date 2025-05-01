@@ -4,7 +4,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ASCII1 } from "../components/labs/ASCII1";
 import { ScrambleText } from "../components/ui/scramble-text/ScrambleText";
 
-export const Route = createFileRoute("/_/$")({
+export const Route = createFileRoute("/$")({
 	component: RouteComponent,
 });
 

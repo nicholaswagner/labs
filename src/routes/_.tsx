@@ -1,6 +1,5 @@
 import { Outlet, createFileRoute } from "@tanstack/react-router";
 
-import { Container } from "@radix-ui/themes";
 import { Nav } from "../components/Nav";
 
 export const Route = createFileRoute("/_")({
@@ -17,9 +16,7 @@ function RouteComponent() {
 	return (
 		<>
 			<Nav />
-			<Container size="4">
-				<Outlet />
-			</Container>
+			<Outlet />
 		</>
 	);
 }

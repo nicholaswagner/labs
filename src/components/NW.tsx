@@ -3,22 +3,22 @@ import type { SVGProps } from "react";
 export const NW = ({ style, className }: SVGProps<SVGElement>) => (
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
-		width="64"
-		height="35"
-		viewBox="0,0,64,35"
 		fill="currentColor"
 		style={style}
 		className={className}
+		viewBox="0 0 24 24"
+		width="24"
+		height="auto"
 	>
 		<title>NW</title>
 		<path
 			fill="currentColor"
-			d="M39.724 35 20 0h4.931L42.19 31.5 59.448 0H64L44.276 35h-4.552Z"
+			d="M14.9886 19 7.66679 6h1.83045l6.40656 11.7L22.3104 6H24l-7.3218 13h-1.6896Z"
 		/>
 		<path
 			fill="currentColor"
-			d="M19.724 35 0 0h4.931L22.19 31.5 39.448 0H44L24.276 35h-4.552Z"
+			d="M7.32179 19 0 6h1.83045l6.40656 11.7L14.6436 6h1.6896L9.01143 19H7.32179Z"
 		/>
-		<path fill="currentColor" d="M20.654 0H25L6.165 35H2" />
+		<path fill="currentColor" d="M7.66679 6h1.61344L2.28864 19H.742419" />
 	</svg>
 );

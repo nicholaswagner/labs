@@ -1,35 +1,66 @@
 import { Text } from "@radix-ui/themes";
 import type { TextProps } from "@radix-ui/themes";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import type { ScrambleOptions } from "../../hooks/useScrambleText";
 import { useScrambleText } from "../../hooks/useScrambleText";
 
 export const ScrambleText = ({
 	children,
 	style,
-	scrambleOptions,
-}: Partial<TextProps> & { scrambleOptions?: Partial<ScrambleOptions> }) => {
+	...props
+}: Partial<TextProps> & Partial<ScrambleOptions>) => {
 	const ref = useRef<HTMLElement | null>(null);
 
 	const defaults: ScrambleOptions = {
 		autoPlay: true,
 		delay: 500,
-		duration: 800,
+		duration: 600,
 		easing: "easeInOut",
 		mode: "word",
 	};
 
-	const scramble = useScrambleText(ref, {
+	const trigger = useScrambleText(ref, {
 		...defaults,
-		...scrambleOptions,
+		...props,
 	});
+
+	useEffect(() => {
+		const observer = new IntersectionObserver(
+			([entry]) => {
+				if (entry.isIntersecting) {
+					trigger();
+				}
+			},
+			{ threshold: 0.25 },
+		);
+		if (ref.current) {
+			observer.observe(ref.current);
+		}
+		return () => {
+			if (ref.current) {
+				observer.unobserve(ref.current);
+			}
+		};
+	}, [trigger]);
 
 	return (
 		<Text
 			ref={ref}
 			style={{
+				fontFamily: "monospace",
+				textTransform: "uppercase",
+				background: `repeating-linear-gradient(
+					to right,
+					var(--gray-3) 0,
+					var(--gray-3) 1ch,
+					transparent 1ch,
+					transparent calc(1ch + 0.1em)
+				  )`,
+				transition: "var(--transition-stuff)",
+				letterSpacing: "0.1em",
 				...style,
 			}}
+			{...props}
 		>
 			{children}
 		</Text>

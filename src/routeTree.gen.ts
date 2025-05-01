@@ -12,9 +12,10 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as Import } from './routes/_'
-import { Route as TemplatesSplatImport } from './routes/templates/$'
+import { Route as SplatImport } from './routes/$'
+import { Route as TempSplatImport } from './routes/temp/$'
 import { Route as Bos04Import } from './routes/bos/04'
-import { Route as SplatImport } from './routes/_.$'
+import { Route as Articles1Import } from './routes/_.articles/1'
 
 // Create/Update Routes
 
@@ -23,9 +24,15 @@ const Route = Import.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const TemplatesSplatRoute = TemplatesSplatImport.update({
-  id: '/templates/$',
-  path: '/templates/$',
+const SplatRoute = SplatImport.update({
+  id: '/$',
+  path: '/$',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const TempSplatRoute = TempSplatImport.update({
+  id: '/temp/$',
+  path: '/temp/$',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -35,9 +42,9 @@ const Bos04Route = Bos04Import.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const SplatRoute = SplatImport.update({
-  id: '/$',
-  path: '/$',
+const Articles1Route = Articles1Import.update({
+  id: '/articles/1',
+  path: '/articles/1',
   getParentRoute: () => Route,
 } as any)
 
@@ -45,18 +52,18 @@ const SplatRoute = SplatImport.update({
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/$': {
+      id: '/$'
+      path: '/$'
+      fullPath: '/$'
+      preLoaderRoute: typeof SplatImport
+      parentRoute: typeof rootRoute
+    }
     '/_': {
       id: '/_'
       path: ''
       fullPath: ''
       preLoaderRoute: typeof Import
-      parentRoute: typeof rootRoute
-    }
-    '/_/$': {
-      id: '/_/$'
-      path: '/$'
-      fullPath: '/$'
-      preLoaderRoute: typeof SplatImport
       parentRoute: typeof rootRoute
     }
     '/bos/04': {
@@ -66,11 +73,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Bos04Import
       parentRoute: typeof rootRoute
     }
-    '/templates/$': {
-      id: '/templates/$'
-      path: '/templates/$'
-      fullPath: '/templates/$'
-      preLoaderRoute: typeof TemplatesSplatImport
+    '/temp/$': {
+      id: '/temp/$'
+      path: '/temp/$'
+      fullPath: '/temp/$'
+      preLoaderRoute: typeof TempSplatImport
+      parentRoute: typeof rootRoute
+    }
+    '/_/articles/1': {
+      id: '/_/articles/1'
+      path: '/articles/1'
+      fullPath: '/articles/1'
+      preLoaderRoute: typeof Articles1Import
       parentRoute: typeof rootRoute
     }
   }
@@ -79,56 +93,61 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 interface RouteChildren {
-  SplatRoute: typeof SplatRoute
+  Articles1Route: typeof Articles1Route
 }
 
 const RouteChildren: RouteChildren = {
-  SplatRoute: SplatRoute,
+  Articles1Route: Articles1Route,
 }
 
 const RouteWithChildren = Route._addFileChildren(RouteChildren)
 
 export interface FileRoutesByFullPath {
-  '': typeof RouteWithChildren
   '/$': typeof SplatRoute
+  '': typeof RouteWithChildren
   '/bos/04': typeof Bos04Route
-  '/templates/$': typeof TemplatesSplatRoute
+  '/temp/$': typeof TempSplatRoute
+  '/articles/1': typeof Articles1Route
 }
 
 export interface FileRoutesByTo {
-  '': typeof RouteWithChildren
   '/$': typeof SplatRoute
+  '': typeof RouteWithChildren
   '/bos/04': typeof Bos04Route
-  '/templates/$': typeof TemplatesSplatRoute
+  '/temp/$': typeof TempSplatRoute
+  '/articles/1': typeof Articles1Route
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
+  '/$': typeof SplatRoute
   '/_': typeof RouteWithChildren
-  '/_/$': typeof SplatRoute
   '/bos/04': typeof Bos04Route
-  '/templates/$': typeof TemplatesSplatRoute
+  '/temp/$': typeof TempSplatRoute
+  '/_/articles/1': typeof Articles1Route
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '' | '/$' | '/bos/04' | '/templates/$'
+  fullPaths: '/$' | '' | '/bos/04' | '/temp/$' | '/articles/1'
   fileRoutesByTo: FileRoutesByTo
-  to: '' | '/$' | '/bos/04' | '/templates/$'
-  id: '__root__' | '/_' | '/_/$' | '/bos/04' | '/templates/$'
+  to: '/$' | '' | '/bos/04' | '/temp/$' | '/articles/1'
+  id: '__root__' | '/$' | '/_' | '/bos/04' | '/temp/$' | '/_/articles/1'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
+  SplatRoute: typeof SplatRoute
   Route: typeof RouteWithChildren
   Bos04Route: typeof Bos04Route
-  TemplatesSplatRoute: typeof TemplatesSplatRoute
+  TempSplatRoute: typeof TempSplatRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
+  SplatRoute: SplatRoute,
   Route: RouteWithChildren,
   Bos04Route: Bos04Route,
-  TemplatesSplatRoute: TemplatesSplatRoute,
+  TempSplatRoute: TempSplatRoute,
 }
 
 export const routeTree = rootRoute
@@ -141,26 +160,30 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
+        "/$",
         "/_",
         "/bos/04",
-        "/templates/$"
+        "/temp/$"
       ]
+    },
+    "/$": {
+      "filePath": "$.tsx"
     },
     "/_": {
       "filePath": "_.tsx",
       "children": [
-        "/_/$"
+        "/_/articles/1"
       ]
-    },
-    "/_/$": {
-      "filePath": "_.$.tsx",
-      "parent": "/_"
     },
     "/bos/04": {
       "filePath": "bos/04.tsx"
     },
-    "/templates/$": {
-      "filePath": "templates/$.tsx"
+    "/temp/$": {
+      "filePath": "temp/$.tsx"
+    },
+    "/_/articles/1": {
+      "filePath": "_.articles/1.tsx",
+      "parent": "/_"
     }
   }
 }

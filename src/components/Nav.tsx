@@ -19,24 +19,29 @@ export const Nav = () => {
 			direction="row"
 			justify="between"
 			align="center"
-			gapX="6"
 			py={{ initial: "1" }}
 			px={{ initial: "6" }}
 			style={{
-				backgroundColor: "var(--accent-3)",
-				position: "absolute",
+				// transition: "background-color 1.6s ease-out, color 1.6s ease-out",
+				transition: "var(--transition-stuff)",
+				backgroundColor: "var(--color-background)",
+				position: "static",
 				left: 0,
 				top: 0,
 				width: "100%",
 				zIndex: 5,
 			}}
 		>
-			<Flex align="center" gap="6">
+			<Flex align="center" gapX={{ initial: "6" }}>
 				<HoverCard.Root>
 					<HoverCard.Trigger>
 						<Link href="https://www.nicholaswagner.dev" target="_blank">
 							<NW
-								style={{ scale: 0.5, color: "var(--accent-11)" }}
+								style={{
+									color: "var(--accent-11)",
+									height: "auto",
+									width: "3rem",
+								}}
 								className="nwLink"
 							/>
 						</Link>
@@ -45,7 +50,7 @@ export const Nav = () => {
 						<Card
 							style={{
 								padding: "1.5rem",
-								backgroundColor: "var(--accent-2)",
+								backgroundColor: "var(--accent-1)",
 							}}
 						>
 							<Flex gap="4" direction="row" align="center" justify="start">
