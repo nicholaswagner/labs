@@ -1,6 +1,5 @@
 import {
 	AspectRatio,
-	Badge,
 	Container,
 	Em,
 	Flex,
@@ -10,6 +9,7 @@ import {
 	Text,
 } from "@radix-ui/themes";
 import { createFileRoute } from "@tanstack/react-router";
+import { NW } from "../../components/NW";
 import { ScrambleText } from "../../components/ui/scramble-text/ScrambleText";
 
 export const Route = createFileRoute("/_/articles/1")({
@@ -85,7 +85,7 @@ function RouteComponent() {
 				>
 					<AspectRatio ratio={16 / 8}>
 						<img
-							src="https://picsum.photos/seed/xx/1200/200"
+							src="https://picsum.photos/1200/200"
 							alt="A house in a forest"
 							style={{
 								objectFit: "cover",

@@ -3,6 +3,7 @@ import type { TextProps } from "@radix-ui/themes";
 import { useEffect, useRef } from "react";
 import type { ScrambleOptions } from "../../hooks/useScrambleText";
 import { useScrambleText } from "../../hooks/useScrambleText";
+import { useTheme } from "../ThemeContext";
 
 export const ScrambleText = ({
 	children,
@@ -13,7 +14,7 @@ export const ScrambleText = ({
 
 	const defaults: ScrambleOptions = {
 		autoPlay: true,
-		delay: 500,
+		delay: 0,
 		duration: 600,
 		easing: "easeInOut",
 		mode: "word",
@@ -23,6 +24,13 @@ export const ScrambleText = ({
 		...defaults,
 		...props,
 	});
+
+	const { theme } = useTheme();
+
+	useEffect(() => {
+		if (!ref.current) return;
+		trigger();
+	}, [theme]);
 
 	useEffect(() => {
 		const observer = new IntersectionObserver(
@@ -47,17 +55,17 @@ export const ScrambleText = ({
 		<Text
 			ref={ref}
 			style={{
+				color: "var(--accent-12)",
 				fontFamily: "monospace",
 				textTransform: "uppercase",
+				letterSpacing: "0.1em",
 				background: `repeating-linear-gradient(
 					to right,
-					var(--gray-3) 0,
-					var(--gray-3) 1ch,
+					var(--gray-5) 0,
+					var(--gray-5) 1ch,
 					transparent 1ch,
 					transparent calc(1ch + 0.1em)
 				  )`,
-				transition: "var(--transition-stuff)",
-				letterSpacing: "0.1em",
 				...style,
 			}}
 			{...props}

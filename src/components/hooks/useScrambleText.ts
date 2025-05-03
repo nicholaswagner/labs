@@ -13,22 +13,22 @@ type EasingName =
 type ScrambleMode = "char" | "word";
 
 export type ScrambleOptions = {
-	chars?: string;
-	duration?: number;
-	delay?: number;
-	onDone?: () => void;
-	easing?: EasingName | ((t: number) => number);
-	shuffle?: boolean;
 	autoPlay?: boolean;
+	chars?: string;
+	delay?: number;
+	duration?: number;
+	easing?: EasingName | ((t: number) => number);
 	mode?: ScrambleMode;
+	onDone?: () => void;
+	shuffle?: boolean;
 };
 
 export function useScrambleText<T extends HTMLElement | null>(
 	ref: RefObject<T>,
 	options: ScrambleOptions = {},
 ) {
-	const frameRef = useRef<number | null>(null);
 	const delayTimeoutRef = useRef<number | null>(null);
+	const frameRef = useRef<number | null>(null);
 	const originalTextRef = useRef<string | null>(null);
 	const startTimeRef = useRef<number>(0);
 
@@ -135,9 +135,8 @@ export function useScrambleText<T extends HTMLElement | null>(
 function shouldPreserve(unit: string, mode: ScrambleMode): boolean {
 	if (mode === "word") {
 		return /\s+/.test(unit); // entire whitespace chunk
-	} else {
-		return /^\s$/.test(unit); // single whitespace char
 	}
+	return /^\s$/.test(unit); // single whitespace char
 }
 
 function scrambleUnit(

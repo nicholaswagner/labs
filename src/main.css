@@ -1,5 +1,7 @@
 :root {
-	--transition-stuff: background-color 1.5s ease, color 1.5s ease;
+	/* --transition-stuff: background-color 1.5s ease, color 1.5s ease; */
+	--transition-stuff: background-color 0.33s cubic-bezier(0.5, 1, 0.89, 1),
+		color 0.6s cubic-bezier(0.5, 1, 0.89, 1);
 }
 
 body {
@@ -8,7 +10,7 @@ body {
 	opacity: 0;
 	transition: var(--transition-stuff);
 	/* transition: opacity 1.5s ease-out, color 1.6s ease-out; */
-	animation: triggerTransition 1.5s ease forwards;
+	animation: triggerTransition 1.5s cubic-bezier(0.5, 1, 0.89, 1) forwards;
 	/* animation: triggerTransition 1.5s ease-in-out forwards; */
 }
 
@@ -22,6 +24,22 @@ body {
 	--heading-leading-trim-start: 0.42em;
 	--heading-leading-trim-end: 0.38em;
 	--heading-letter-spacing: -0.01em;
+
+	--cursor-button: pointer !important;
+	--cursor-checkbox: default;
+	--cursor-disabled: not-allowed;
+	--cursor-link: pointer;
+	--cursor-menu-item: default;
+	--cursor-radio: default;
+	--cursor-slider-thumb: default;
+	--cursor-slider-thumb-active: default;
+	--cursor-switch: pointer !important;
+}
+
+img {
+	opacity: 0;
+	transition: opacity 1.5s ease, color 1.5s ease;
+	animation: triggerTransition 1.5s ease 0.5s forwards;
 }
 
 @keyframes triggerTransition {

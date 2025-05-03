@@ -22,7 +22,6 @@ export const Nav = () => {
 			py={{ initial: "1" }}
 			px={{ initial: "6" }}
 			style={{
-				// transition: "background-color 1.6s ease-out, color 1.6s ease-out",
 				transition: "var(--transition-stuff)",
 				backgroundColor: "var(--color-background)",
 				position: "static",
