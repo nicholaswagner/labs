@@ -1,0 +1,9 @@
+.blurBox {
+	position: absolute;
+	height: 3rem;
+	width: 100%;
+	top: 0;
+	left: 0;
+	mask-image: linear-gradient(to bottom, #000, 50%, transparent);
+	backdrop-filter: blur(10px);
+}

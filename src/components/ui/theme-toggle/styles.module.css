@@ -8,7 +8,7 @@
 	}
 
 	28% {
-		transform: scale(0.13);
+		transform: scale(0.15);
 	}
 
 	44% {
@@ -38,26 +38,28 @@
 }
 
 .Root {
-	cursor: pointer !important;
 	/* all: unset; */
+	font-size: var(--default-font-size);
+	box-sizing: content-box;
+	cursor: pointer !important;
 	padding-block: 0;
 	padding-inline: 0;
-	width: 3rem;
+	width: 48px;
 	height: auto;
 	background-color: var(--accent-11);
 	/* border: 0.14rem solid var(--accent-5); */
-	border: 0.14rem solid var(--accent-11);
+	border: 2px solid var(--accent-11);
 	border-radius: 9999px;
 	color: var(--black-a12);
-	transition: background-color 500ms cubic-bezier(0.83, 0, 0.17, 1),
+	transition: background-color 0.33s cubic-bezier(0.83, 0, 0.17, 1),
 		border-color 300ms ease-in;
 	overflow: hidden;
-	&[data-state="checked"] {
-		/* background-color: var(--accent-indicator); */
-		/* background-color: var(--gray-6); */
-		/* border-color: var(--accent-indicator); */
-		/* border: 2px solid var(--accent-indicator); */
-	}
+	/* &[data-state="checked"] { */
+	/* background-color: var(--accent-indicator); */
+	/* background-color: var(--gray-6); */
+	/* border-color: var(--accent-indicator); */
+	/* border: 2px solid var(--accent-indicator); */
+	/* } */
 	&:hover {
 		overflow: visible;
 		animation: scale-easeOutElastic;
@@ -65,32 +67,34 @@
 }
 
 .Thumb {
+	box-sizing: content-box;
 	align-items: center;
 	border-radius: 9999px;
 	background-color: var(--accent-contrast);
-	border: 0.14rem solid var(--gray-1);
+	border: 1px solid transparent;
 	display: flex;
 	height: 24px;
 	width: 24px;
 	justify-content: center;
-	transform: translateX(0);
+	transform: translateX(1);
 	transition: transform 0.33s cubic-bezier(0.83, 0, 0.17, 1), opacity 0.33s
+		cubic-bezier(0.83, 0, 0.17, 1), background-color 0.33s
 		cubic-bezier(0.83, 0, 0.17, 1);
 	will-change: transform;
 	svg {
 		color: var(--accent-10);
 		fill: var(--accent-10);
 		transition: transform 0.33s cubic-bezier(0.83, 0, 0.17, 1) 0.33s, scale 0.3s
-			cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s;
+			cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s, background-color 0.33s ease-in 1s;
 	}
 
 	&[data-state="checked"] {
 		background-color: var(--gray-1);
-		transform: translateX(1rem);
-		svg {
+		transform: translateX(22px);
+		/* svg {
 			color: transparent;
 			fill: var(--accent-11);
-		}
+		} */
 	}
 	&:hover {
 		svg {

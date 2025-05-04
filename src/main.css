@@ -1,8 +1,37 @@
+@keyframes theme-flicker {
+	0% {
+		filter: none;
+	} /* current theme */
+	25% {
+		filter: grayscale(1) brightness(1);
+	} /* neutral gray */
+	50% {
+		filter: grayscale(1) brightness(0);
+	}
+	100% {
+		filter: grayscale(1) brightness(1);
+	}
+	/* reveal new theme */
+}
+
 :root {
 	/* --transition-stuff: background-color 1.5s ease, color 1.5s ease; */
 	--transition-stuff: background-color 0.33s cubic-bezier(0.5, 1, 0.89, 1),
 		color 0.6s cubic-bezier(0.5, 1, 0.89, 1);
 }
+
+@keyframes drift {
+	from {
+		transform: translate(-50%, -50%) rotate(0deg);
+	}
+	to {
+		transform: translate(-48%, -52%) rotate(1deg);
+	}
+}
+
+/* html.theme-flicker {
+	animation: theme-flicker 1s ease-in forwards;
+} */
 
 body {
 	margin: 0;
@@ -34,6 +63,83 @@ body {
 	--cursor-slider-thumb: default;
 	--cursor-slider-thumb-active: default;
 	--cursor-switch: pointer !important;
+
+	.parallax {
+		z-index: -200;
+		position: fixed;
+		inset: 0;
+		pointer-events: none; /* so it never blocks clicks */
+		perspective: 800px; /* enables translateZ depth */
+	}
+
+	.layer {
+		position: absolute;
+		inset: 0;
+		will-change: transform;
+	}
+
+	.layer.dot-grid-2 {
+		--cell: 128px; /* spacing between dots         */
+		--dot-size: 1px; /* diameter                     */
+		--dot-col: var(--accent-5); /* tint (theme‑switchable) */
+
+		pointer-events: none;
+		/* mix-blend-mode: soft-light;  */
+		/* optional – tint adapts to bg */
+
+		background-image: radial-gradient(
+			circle at center,
+			var(--dot-col) 0,
+			var(--dot-col) var(--dot-size),
+			transparent calc(var(--dot-size) + 1px)
+		);
+		background-size: var(--cell) var(--cell); /* tile spacing */
+		animation: drift 20s ease-in-out alternate infinite;
+	}
+	.layer.dot-grid-1 {
+		--cell: 64px; /* spacing between dots         */
+		--dot-size: 1px; /* diameter                     */
+		--dot-col: var(--accent-5); /* tint (theme‑switchable) */
+
+		pointer-events: none;
+		/* mix-blend-mode: soft-light;  */
+		/* optional – tint adapts to bg */
+
+		background-image: radial-gradient(
+			circle at center,
+			var(--dot-col) 0,
+			var(--dot-col) var(--dot-size),
+			transparent calc(var(--dot-size) + 1px)
+		);
+		background-size: var(--cell) var(--cell); /* tile spacing */
+	}
+
+	.layer.dot-grid {
+		--cell: 16px; /* spacing between dots         */
+		--dot-size: 1px; /* diameter                     */
+		--dot-col: var(--accent-3); /* tint (theme‑switchable) */
+
+		pointer-events: none;
+		/* mix-blend-mode: soft-light;  */
+		/* optional – tint adapts to bg */
+
+		background-image: radial-gradient(
+			circle at center,
+			var(--dot-col) 0,
+			var(--dot-col) var(--dot-size),
+			transparent calc(var(--dot-size))
+		);
+		background-size: var(--cell) var(--cell); /* tile spacing */
+	}
+	/* .layer.dot-grid {
+		transform: translateY(calc(var(--scroll) * -1vh));
+	}
+	.layer.dot-grid-1 {
+		transform: translateY(calc(var(--scroll) * -2.5vh));
+	}
+	.layer.dot-grid-2 {
+		transform: translateY(calc(var(--scroll) * -5vh));
+	} */
 }
 
 img {

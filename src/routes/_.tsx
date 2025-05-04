@@ -1,6 +1,6 @@
 import { Outlet, createFileRoute } from "@tanstack/react-router";
 
-import { Nav } from "../components/Nav";
+import { Nav } from "../components/ui/site-nav/Nav";
 
 export const Route = createFileRoute("/_")({
 	component: RouteComponent,

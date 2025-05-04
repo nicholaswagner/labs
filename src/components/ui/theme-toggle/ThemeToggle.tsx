@@ -5,9 +5,9 @@ import { debounce } from "../../../utils/debounce";
 import { useTheme } from "../ThemeContext";
 import styles from "./styles.module.css";
 
-interface ThemeToggleProps extends Component<typeof Switch> {
-	checked: boolean;
-	onCheckedChange: (checked: boolean) => void;
+interface ThemeToggleProps extends Partial<Component<typeof Switch>> {
+	checked?: boolean;
+	onCheckedChange?: (checked: boolean) => void;
 }
 
 export const ThemeToggle = forwardRef<HTMLButtonElement, ThemeToggleProps>(
@@ -16,7 +16,9 @@ export const ThemeToggle = forwardRef<HTMLButtonElement, ThemeToggleProps>(
 
 		const handleChange = (value: boolean) => {
 			if (value !== checked) {
-				debounce(toggleTheme, 300)();
+				debounce(toggleTheme, 400)();
+
+				if (!onCheckedChange) return;
 				onCheckedChange(value);
 			}
 		};
@@ -32,11 +34,11 @@ export const ThemeToggle = forwardRef<HTMLButtonElement, ThemeToggleProps>(
 				{...props}
 			>
 				<Switch.Thumb className={styles.Thumb}>
-					{/* {checked ? (
+					{checked ? (
 						<Moon strokeWidth={2} size={14} />
 					) : (
 						<Sun strokeWidth={2} size={14} />
-					)} */}
+					)}
 				</Switch.Thumb>{" "}
 			</Switch.Root>
 		);

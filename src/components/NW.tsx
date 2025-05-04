@@ -10,8 +10,8 @@ export const NW = ({
 }: SVGProps<SVGSVGElement> & variantPropType) => {
 	const chonky = (
 		<path
-			fill-rule="evenodd"
-			clip-rule="evenodd"
+			fillRule="evenodd"
+			clipRule="evenodd"
 			d="M3.94372 12.4361L0 6H2.60291L5.17318 10.3145L7.67339 6H9.85629L12.0666 9.71029L14.277 6H16.7466L13.2529 11.7017L15.6933 15.7981L21.5303 6H24L16.647 18H14.6064L12 13.7464L9.39363 18H7.353L5.14589 14.398L3.03832 18H0.719503L3.94372 12.4361ZM8.43992 15.7981L6.36482 12.3148L8.68892 8.34278L10.8146 11.8119L8.43992 15.7981Z"
 			fill="currentColor"
 		/>
@@ -20,9 +20,9 @@ export const NW = ({
 	const heavy = (
 		<path
 			fill="currentColor"
-			fill-rule="evenodd"
+			fillRule="evenodd"
 			d="M3.94208 12.9839 0 6h2.22738l2.759 5.0276L7.67018 6h2.01156l2.38676 4.3492L14.4552 6h2.0904l-3.4802 6.1658 2.7302 4.9753L21.9096 6H24l-7.3378 13h-1.87L12 14.0532 9.20783 19h-1.87l-2.38578-4.2267L2.67387 19H.730644l3.211436-6.0161Zm4.3992 4.561-2.57482-4.692 2.82286-5.23731 2.63708 4.67191-2.88512 5.2574Z"
-			clip-rule="evenodd"
+			clipRule="evenodd"
 		/>
 	);
 

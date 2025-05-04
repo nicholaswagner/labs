@@ -1,11 +1,12 @@
 import { Avatar, Card, Flex, HoverCard, Link, Text } from "@radix-ui/themes";
 
 import { useState } from "react";
-import profileImage from "../assets/pixelized_profile.png";
-import { NW } from "../components/NW";
-import { BreadCrumbs } from "../components/ui/breadcrumbs/BreadCrumbs";
-import { ThemeToggle } from "../components/ui/theme-toggle/ThemeToggle";
-import { useTheme } from "./ui/ThemeContext";
+import profileImage from "../../../assets/pixelized_profile.png";
+import { NW } from "../../NW";
+import { useTheme } from "../ThemeContext";
+import { BreadCrumbs } from "../breadcrumbs/BreadCrumbs";
+import { ThemeToggle } from "../theme-toggle/ThemeToggle";
+import styles from "./nav.module.css";
 
 export const Nav = () => {
 	const { theme } = useTheme();
@@ -23,12 +24,13 @@ export const Nav = () => {
 			px={{ initial: "6" }}
 			style={{
 				transition: "var(--transition-stuff)",
-				backgroundColor: "var(--color-background)",
-				position: "static",
-				left: 0,
-				top: 0,
+				// backgroundColor: "var(--color-background)",
+				height: "4rem",
 				width: "100%",
-				zIndex: 5,
+				// position: "sticky",
+				// left: 0,
+				// top: 0,
+				// zIndex: 5,
 			}}
 		>
 			<Flex align="center" gapX={{ initial: "6" }}>
