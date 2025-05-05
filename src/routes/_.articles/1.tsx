@@ -26,7 +26,7 @@ function RouteComponent() {
 	return (
 		<Flex
 			px={{ initial: "6" }}
-			py={{ initial: "9" }}
+			pt={{ initial: "9" }}
 			direction={{ initial: "column" }}
 			gapY={{ initial: "9" }}
 		>

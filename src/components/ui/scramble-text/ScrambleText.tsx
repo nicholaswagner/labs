@@ -25,12 +25,12 @@ export const ScrambleText = ({
 		...props,
 	});
 
-	const { theme } = useTheme();
+	const { themeProps } = useTheme();
 
 	useEffect(() => {
-		if (!ref.current) return;
+		if (!ref.current || themeProps) return;
 		trigger();
-	}, [theme]);
+	}, [themeProps]);
 
 	useEffect(() => {
 		const observer = new IntersectionObserver(

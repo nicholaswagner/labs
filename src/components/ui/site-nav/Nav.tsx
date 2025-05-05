@@ -20,6 +20,7 @@ export const Nav = () => {
 			direction="row"
 			justify="between"
 			align="center"
+			mt={{ initial: "2" }}
 			py={{ initial: "1" }}
 			px={{ initial: "6" }}
 			style={{
