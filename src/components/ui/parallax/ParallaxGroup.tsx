@@ -1,25 +1,26 @@
 import { clsx } from "clsx";
-import { forwardRef, useEffect, useState } from "react";
-import type { CSSProperties, HTMLAttributes } from "react";
+import { forwardRef } from "react";
+import type { HTMLAttributes } from "react";
 import styles from "./styles.module.css";
 
 export const ParallaxGroup = forwardRef<
 	HTMLDivElement,
 	HTMLAttributes<HTMLDivElement> & { showDebug?: boolean }
->(({ children, className, showDebug = false, ...rest }, ref) => {
-	const debugStyles: CSSProperties = showDebug
-		? {
-				transform: "translate3d(0px, 0, -300px) rotateY(30deg);",
-			}
+>(({ children, className, showDebug = false, style, ...rest }, ref) => {
+	const classnames = clsx(styles.parallaxGroup, className);
+	const debugStyle = showDebug
+		? { transform: "translate3d(300px,0,-800px) rotateY(30deg)" }
 		: {};
-	const classnames = clsx(styles.parallaxGroup, className, debugStyles);
-
-	useEffect(() => {
-		console.log(showDebug);
-	}, [showDebug]);
-
 	return (
-		<div ref={ref} className={classnames} style={debugStyles} {...rest}>
+		<div
+			ref={ref}
+			className={classnames}
+			style={{
+				...style,
+				...debugStyle,
+			}}
+			{...rest}
+		>
 			{children}
 		</div>
 	);
