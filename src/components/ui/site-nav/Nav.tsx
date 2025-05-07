@@ -6,7 +6,6 @@ import { NW } from "../../NW";
 import { useTheme } from "../ThemeContext";
 import { BreadCrumbs } from "../breadcrumbs/BreadCrumbs";
 import { ThemeToggle } from "../theme-toggle/ThemeToggle";
-import styles from "./nav.module.css";
 
 export const Nav = () => {
 	const { theme } = useTheme();

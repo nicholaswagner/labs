@@ -16,6 +16,7 @@ import { Route as SplatImport } from './routes/$'
 import { Route as R1IndexImport } from './routes/1/index'
 import { Route as TempSplatImport } from './routes/temp/$'
 import { Route as Bos04Import } from './routes/bos/04'
+import { Route as R2IndexImport } from './routes/_.2/index'
 import { Route as Articles1Import } from './routes/_.articles/1'
 
 // Create/Update Routes
@@ -47,6 +48,12 @@ const Bos04Route = Bos04Import.update({
   id: '/bos/04',
   path: '/bos/04',
   getParentRoute: () => rootRoute,
+} as any)
+
+const R2IndexRoute = R2IndexImport.update({
+  id: '/2/',
+  path: '/2/',
+  getParentRoute: () => Route,
 } as any)
 
 const Articles1Route = Articles1Import.update({
@@ -101,6 +108,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Articles1Import
       parentRoute: typeof rootRoute
     }
+    '/_/2/': {
+      id: '/_/2/'
+      path: '/2'
+      fullPath: '/2'
+      preLoaderRoute: typeof R2IndexImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -108,10 +122,12 @@ declare module '@tanstack/react-router' {
 
 interface RouteChildren {
   Articles1Route: typeof Articles1Route
+  R2IndexRoute: typeof R2IndexRoute
 }
 
 const RouteChildren: RouteChildren = {
   Articles1Route: Articles1Route,
+  R2IndexRoute: R2IndexRoute,
 }
 
 const RouteWithChildren = Route._addFileChildren(RouteChildren)
@@ -123,6 +139,7 @@ export interface FileRoutesByFullPath {
   '/temp/$': typeof TempSplatRoute
   '/1': typeof R1IndexRoute
   '/articles/1': typeof Articles1Route
+  '/2': typeof R2IndexRoute
 }
 
 export interface FileRoutesByTo {
@@ -132,6 +149,7 @@ export interface FileRoutesByTo {
   '/temp/$': typeof TempSplatRoute
   '/1': typeof R1IndexRoute
   '/articles/1': typeof Articles1Route
+  '/2': typeof R2IndexRoute
 }
 
 export interface FileRoutesById {
@@ -142,14 +160,23 @@ export interface FileRoutesById {
   '/temp/$': typeof TempSplatRoute
   '/1/': typeof R1IndexRoute
   '/_/articles/1': typeof Articles1Route
+  '/_/2/': typeof R2IndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/$' | '' | '/bos/04' | '/temp/$' | '/1' | '/articles/1'
+  fullPaths: '/$' | '' | '/bos/04' | '/temp/$' | '/1' | '/articles/1' | '/2'
   fileRoutesByTo: FileRoutesByTo
-  to: '/$' | '' | '/bos/04' | '/temp/$' | '/1' | '/articles/1'
-  id: '__root__' | '/$' | '/_' | '/bos/04' | '/temp/$' | '/1/' | '/_/articles/1'
+  to: '/$' | '' | '/bos/04' | '/temp/$' | '/1' | '/articles/1' | '/2'
+  id:
+    | '__root__'
+    | '/$'
+    | '/_'
+    | '/bos/04'
+    | '/temp/$'
+    | '/1/'
+    | '/_/articles/1'
+    | '/_/2/'
   fileRoutesById: FileRoutesById
 }
 
@@ -192,7 +219,8 @@ export const routeTree = rootRoute
     "/_": {
       "filePath": "_.tsx",
       "children": [
-        "/_/articles/1"
+        "/_/articles/1",
+        "/_/2/"
       ]
     },
     "/bos/04": {
@@ -206,6 +234,10 @@ export const routeTree = rootRoute
     },
     "/_/articles/1": {
       "filePath": "_.articles/1.tsx",
+      "parent": "/_"
+    },
+    "/_/2/": {
+      "filePath": "_.2/index.tsx",
       "parent": "/_"
     }
   }
