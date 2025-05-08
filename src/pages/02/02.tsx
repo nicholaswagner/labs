@@ -23,7 +23,13 @@ import { useTheme } from "@/components/ui/ThemeContext";
 import { ParallaxGroup } from "@/components/ui/parallax/ParallaxGroup";
 import { ParallaxLayer } from "@/components/ui/parallax/ParallaxLayer";
 import { ThemeToggle } from "@/components/ui/theme-toggle/ThemeToggle";
-import { ArrowUpRight, SquareArrowUpRightIcon } from "lucide-react";
+import {
+	ArrowUpRight,
+	ExternalLink,
+	ExternalLinkIcon,
+	LinkIcon,
+	SquareArrowUpRightIcon,
+} from "lucide-react";
 import ProfileImage from "src/assets/profile.jpg";
 // import Chonkers from "src/assets/chonkers.svg?raw";
 
@@ -175,7 +181,16 @@ const ExperienceLine = () => {
 				<Text size={{ initial: "3" }} mb={{ initial: "1" }}>
 					<ScrambleText weight="regular">{title}</ScrambleText>
 				</Text>
-				<Link href="#">{company}</Link>
+				<Link href="#">
+					{company}{" "}
+					<LinkIcon
+						style={{
+							scale: 0.5,
+							marginLeft: 0,
+							transformOrigin: "bottom left",
+						}}
+					/>
+				</Link>
 				<Text
 					weight="regular"
 					// size={{ initial: "1" }}
@@ -197,9 +212,9 @@ const ExperienceLine = () => {
 			<Flex
 				direction={{ initial: "column", lg: "row" }}
 				width={{ initial: "100%", lg: "70%" }}
-				mt={{ initial: "3", md: "0" }}
+				mt={{ initial: "3" }}
 			>
-				<ul style={{ marginBlockStart: 0, paddingInlineStart: 0 }}>
+				<ul style={{ marginBlockStart: 0, paddingInlineStart: "1rem" }}>
 					<li>{faker.lorem.paragraph()}</li>
 					<li>{faker.lorem.paragraph()}</li>
 					<li>{faker.lorem.paragraph()}</li>
@@ -218,7 +233,7 @@ const Experience = ({
 			weight="regular"
 			mt={{ md: "0" }}
 		>
-			Experience
+			Relevant Experience
 		</Heading>
 
 		<Separator size="4" my={{ initial: "4" }} />
