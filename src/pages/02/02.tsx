@@ -10,28 +10,42 @@ import {
 	Text,
 } from "@radix-ui/themes";
 import type { FlexProps, TextProps } from "@radix-ui/themes";
-import { Component, ReactNode } from "react";
+import {
+	type CSSProperties,
+	type Component,
+	type ReactNode,
+	useState,
+} from "react";
 import styles from "./styles.module.css";
 
+import { NW } from "@/components/NW";
+import { useTheme } from "@/components/ui/ThemeContext";
 import { ParallaxGroup } from "@/components/ui/parallax/ParallaxGroup";
 import { ParallaxLayer } from "@/components/ui/parallax/ParallaxLayer";
+import { ThemeToggle } from "@/components/ui/theme-toggle/ThemeToggle";
 import { ArrowUpRight, SquareArrowUpRightIcon } from "lucide-react";
 import ProfileImage from "src/assets/profile.jpg";
+// import Chonkers from "src/assets/chonkers.svg?raw";
 
-const Headish = () => (
-	<Flex direction="column">
-		<Heading style={{ color: "var(--accent-11)" }} weight="bold">
-			Nicholas Wagner,
-		</Heading>
-		<Heading
-			style={{ color: "var(--gray-11)" }}
-			weight="regular"
-			mb={{ initial: "4" }}
-		>
-			Software Engineer
-		</Heading>
-	</Flex>
-);
+// const Headish = () => (
+// 	<Flex direction="column">
+// 		<Heading
+// 			style={{
+// 				color: "var(--accent-11)",
+// 			}}
+// 			weight="bold"
+// 		>
+// 			Nicholas Wagner,
+// 		</Heading>
+// 		{/* <Heading
+// 			style={{ color: "var(--gray-11)" }}
+// 			weight="regular"
+// 			mb={{ initial: "4" }}
+// 		>
+// 			Software Engineer
+// 		</Heading> */}
+// 	</Flex>
+// );
 
 const ListItem = ({
 	children,
@@ -120,7 +134,14 @@ const MyHandsomeFace = () => (
 
 const SummarySection = () => (
 	<Flex direction="column">
-		<Separator size="4" my={{ initial: "7" }} />
+		<Heading
+			style={{ color: "var(--gray-11)" }}
+			weight="regular"
+			mt={{ md: "0" }}
+		>
+			-
+		</Heading>
+		<Separator size="4" my={{ initial: "4" }} />
 		<Heading size={{ initial: "4" }} weight="regular" mb={{ initial: "5" }}>
 			A seasoned engineer with 10+ years of experience creating scalable
 			platforms and interactive applications for both web and mobile.
@@ -148,42 +169,37 @@ const ExperienceLine = () => {
 		<Flex direction={{ initial: "column", lg: "row" }}>
 			<Flex
 				direction={{ initial: "column" }}
-				width={{ initial: "100%", lg: "35%" }}
+				width={{ initial: "100%", lg: "30%" }}
+				gapY={{ initial: "0.1rem" }}
 			>
-				<Text size={{ initial: "1" }}>
-					<ScrambleText
-						style={
-							{
-								// color: "var(--accent-12)",
-							}
-						}
-					>
-						{title}
-					</ScrambleText>
+				<Text size={{ initial: "3" }} mb={{ initial: "1" }}>
+					<ScrambleText weight="regular">{title}</ScrambleText>
 				</Text>
-				{company}
+				<Link href="#">{company}</Link>
 				<Text
-					weight="medium"
-					size={{ initial: "1" }}
+					weight="regular"
+					// size={{ initial: "1" }}
 					style={{
-						textTransform: "uppercase",
-						fontFamily: "monospace",
 						flexShrink: 0,
-						fontSize: "0.65rem",
-						fontKerning: "auto",
+						letterSpacing: "-0.16px",
+						// fontFamily: "monospace",
+						// fontKerning: "auto",
+						// fontSize: "0.65rem",
+						// textTransform: "uppercase",
 					}}
 				>
-					{years}
+					June 2022 - Present
+					{/* {years} */}
 				</Text>
 				<Text>{cityState}</Text>
 			</Flex>
 
 			<Flex
 				direction={{ initial: "column", lg: "row" }}
-				width={{ initial: "100%", lg: "65%" }}
-				mt={{ initial: "3" }}
+				width={{ initial: "100%", lg: "70%" }}
+				mt={{ initial: "3", md: "0" }}
 			>
-				<ul>
+				<ul style={{ marginBlockStart: 0, paddingInlineStart: 0 }}>
 					<li>{faker.lorem.paragraph()}</li>
 					<li>{faker.lorem.paragraph()}</li>
 					<li>{faker.lorem.paragraph()}</li>
@@ -193,12 +209,18 @@ const ExperienceLine = () => {
 	);
 };
 
-const Experience = ({ getScrambleOffset }) => (
+const Experience = ({
+	getScrambleOffset,
+}: Partial<FlexProps> & { getScrambleOffset: () => number }) => (
 	<Flex direction={{ initial: "column" }} mt={{ initial: "9", md: "0" }}>
-		Experience
-		{/* <Heading size={{ initial: "4" }} weight="regular" mb={{ initial: "5" }}>
+		<Heading
+			style={{ color: "var(--gray-11)" }}
+			weight="regular"
+			mt={{ md: "0" }}
+		>
 			Experience
-		</Heading> */}
+		</Heading>
+
 		<Separator size="4" my={{ initial: "4" }} />
 		<ExperienceLine />
 		<Separator size="4" my={{ initial: "4" }} />
@@ -239,31 +261,45 @@ export const Lab002 = () => {
 		x = x + 1;
 		return 500 + x * 250;
 	};
+	const { theme } = useTheme();
+	const [isChecked, setIsChecked] = useState(theme === "dark");
+	const handleChecked = (value: boolean) => {
+		setIsChecked(value);
+	};
 
 	return (
 		<Flex
 			direction="column"
 			px={{ initial: "3", sm: "6" }}
-			// gapY={{ initial: "6" }}
-			// gapX={{ initial: "0", sm: "9" }}
-			mt={{ initial: "9" }}
+			pt={{ initial: "9" }}
+			// mt={{ initial: "9" }}
 		>
-			<Headish />
-			<Flex
-				direction={{ initial: "column", md: "row" }}
-				// style={{ backgroundColor: "yellow" }}
-			>
-				<Flex
-					width={{ initial: "100%", md: "50%" }}
-					// style={{ backgroundColor: "red" }}
+			<Flex direction="row" justify="between">
+				<NW style={{ color: "var(--accent-9)" }} />
+
+				<ThemeToggle checked={isChecked} onCheckedChange={handleChecked} />
+			</Flex>
+			{/* Heading stuff ------------------------------------------------  */}
+			<Flex direction="column" mb={{ initial: "9" }} gapY={{ initial: "1" }}>
+				<Heading style={{ color: "var(--accent-11)" }} weight="bold">
+					Nicholas Wagner,
+				</Heading>
+				<Heading
+					style={{ color: "var(--gray-11)" }}
+					weight="regular"
+					size={{ initial: "3" }}
 				>
+					<ScrambleText>Software Engineer</ScrambleText>
+				</Heading>
+			</Flex>
+			{/* /End Heading stuff ---------------------------------------------- */}
+
+			<Flex direction={{ initial: "column", md: "row" }}>
+				<Flex width={{ initial: "100%", md: "50%" }}>
 					<SummarySection />
 				</Flex>
 				<Flex width={{ initial: "0px", md: "2rem" }} />
-				<Flex
-					width={{ initial: "100%" }}
-					// style={{ backgroundColor: "blue" }}
-				>
+				<Flex width={{ initial: "100%" }}>
 					<Experience getScrambleOffset={getScrambleOffset} />
 				</Flex>
 				{/* <Headish /> */}

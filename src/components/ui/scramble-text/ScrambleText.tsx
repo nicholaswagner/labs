@@ -21,8 +21,8 @@ const scrambleStyle: CSSProperties = {
 	letterSpacing: "0.1em",
 	background: `repeating-linear-gradient(
 					to right,
-					var(--gray-5) 0,
-					var(--gray-5) 1ch,
+					var(--accent-3) 0,
+					var(--accent-3) 1ch,
 					transparent 1ch,
 					transparent calc(1ch + 0.1em)
 				  )`,

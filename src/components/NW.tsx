@@ -1,6 +1,6 @@
-import type { SVGProps } from "react";
+import type { CSSProperties, SVGProps } from "react";
 
-type variantPropType = { variant: "medium" | "heavy" | "chonky" };
+type variantPropType = { variant?: "medium" | "heavy" | "chonky" };
 
 export const NW = ({
 	style,
@@ -8,6 +8,11 @@ export const NW = ({
 	variant = "chonky",
 	...rest
 }: SVGProps<SVGSVGElement> & variantPropType) => {
+	const mergedStyles = {
+		transformOrigin: "top left",
+		...style,
+	} as CSSProperties;
+
 	const chonky = (
 		<path
 			fillRule="evenodd"
@@ -43,13 +48,13 @@ export const NW = ({
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
-			fill="currentColor"
-			style={style}
-			className={className}
-			viewBox="0 0 24 24"
-			width="24"
-			height="24"
 			aria-hidden="true"
+			className={className}
+			fill="currentColor"
+			height="24px"
+			style={mergedStyles}
+			viewBox="0 0 24 24"
+			width="24px"
 			{...rest}
 		>
 			<title>NW</title>
