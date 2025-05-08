@@ -13,10 +13,10 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as Import } from './routes/_'
 import { Route as SplatImport } from './routes/$'
+import { Route as CvIndexImport } from './routes/cv/index'
 import { Route as R1IndexImport } from './routes/1/index'
 import { Route as TempSplatImport } from './routes/temp/$'
 import { Route as Bos04Import } from './routes/bos/04'
-import { Route as R2IndexImport } from './routes/_.2/index'
 import { Route as Articles1Import } from './routes/_.articles/1'
 
 // Create/Update Routes
@@ -29,6 +29,12 @@ const Route = Import.update({
 const SplatRoute = SplatImport.update({
   id: '/$',
   path: '/$',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const CvIndexRoute = CvIndexImport.update({
+  id: '/cv/',
+  path: '/cv/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -48,12 +54,6 @@ const Bos04Route = Bos04Import.update({
   id: '/bos/04',
   path: '/bos/04',
   getParentRoute: () => rootRoute,
-} as any)
-
-const R2IndexRoute = R2IndexImport.update({
-  id: '/2/',
-  path: '/2/',
-  getParentRoute: () => Route,
 } as any)
 
 const Articles1Route = Articles1Import.update({
@@ -101,18 +101,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof R1IndexImport
       parentRoute: typeof rootRoute
     }
+    '/cv/': {
+      id: '/cv/'
+      path: '/cv'
+      fullPath: '/cv'
+      preLoaderRoute: typeof CvIndexImport
+      parentRoute: typeof rootRoute
+    }
     '/_/articles/1': {
       id: '/_/articles/1'
       path: '/articles/1'
       fullPath: '/articles/1'
       preLoaderRoute: typeof Articles1Import
-      parentRoute: typeof rootRoute
-    }
-    '/_/2/': {
-      id: '/_/2/'
-      path: '/2'
-      fullPath: '/2'
-      preLoaderRoute: typeof R2IndexImport
       parentRoute: typeof rootRoute
     }
   }
@@ -122,12 +122,10 @@ declare module '@tanstack/react-router' {
 
 interface RouteChildren {
   Articles1Route: typeof Articles1Route
-  R2IndexRoute: typeof R2IndexRoute
 }
 
 const RouteChildren: RouteChildren = {
   Articles1Route: Articles1Route,
-  R2IndexRoute: R2IndexRoute,
 }
 
 const RouteWithChildren = Route._addFileChildren(RouteChildren)
@@ -138,8 +136,8 @@ export interface FileRoutesByFullPath {
   '/bos/04': typeof Bos04Route
   '/temp/$': typeof TempSplatRoute
   '/1': typeof R1IndexRoute
+  '/cv': typeof CvIndexRoute
   '/articles/1': typeof Articles1Route
-  '/2': typeof R2IndexRoute
 }
 
 export interface FileRoutesByTo {
@@ -148,8 +146,8 @@ export interface FileRoutesByTo {
   '/bos/04': typeof Bos04Route
   '/temp/$': typeof TempSplatRoute
   '/1': typeof R1IndexRoute
+  '/cv': typeof CvIndexRoute
   '/articles/1': typeof Articles1Route
-  '/2': typeof R2IndexRoute
 }
 
 export interface FileRoutesById {
@@ -159,15 +157,15 @@ export interface FileRoutesById {
   '/bos/04': typeof Bos04Route
   '/temp/$': typeof TempSplatRoute
   '/1/': typeof R1IndexRoute
+  '/cv/': typeof CvIndexRoute
   '/_/articles/1': typeof Articles1Route
-  '/_/2/': typeof R2IndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/$' | '' | '/bos/04' | '/temp/$' | '/1' | '/articles/1' | '/2'
+  fullPaths: '/$' | '' | '/bos/04' | '/temp/$' | '/1' | '/cv' | '/articles/1'
   fileRoutesByTo: FileRoutesByTo
-  to: '/$' | '' | '/bos/04' | '/temp/$' | '/1' | '/articles/1' | '/2'
+  to: '/$' | '' | '/bos/04' | '/temp/$' | '/1' | '/cv' | '/articles/1'
   id:
     | '__root__'
     | '/$'
@@ -175,8 +173,8 @@ export interface FileRouteTypes {
     | '/bos/04'
     | '/temp/$'
     | '/1/'
+    | '/cv/'
     | '/_/articles/1'
-    | '/_/2/'
   fileRoutesById: FileRoutesById
 }
 
@@ -186,6 +184,7 @@ export interface RootRouteChildren {
   Bos04Route: typeof Bos04Route
   TempSplatRoute: typeof TempSplatRoute
   R1IndexRoute: typeof R1IndexRoute
+  CvIndexRoute: typeof CvIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -194,6 +193,7 @@ const rootRouteChildren: RootRouteChildren = {
   Bos04Route: Bos04Route,
   TempSplatRoute: TempSplatRoute,
   R1IndexRoute: R1IndexRoute,
+  CvIndexRoute: CvIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -210,7 +210,8 @@ export const routeTree = rootRoute
         "/_",
         "/bos/04",
         "/temp/$",
-        "/1/"
+        "/1/",
+        "/cv/"
       ]
     },
     "/$": {
@@ -219,8 +220,7 @@ export const routeTree = rootRoute
     "/_": {
       "filePath": "_.tsx",
       "children": [
-        "/_/articles/1",
-        "/_/2/"
+        "/_/articles/1"
       ]
     },
     "/bos/04": {
@@ -232,12 +232,11 @@ export const routeTree = rootRoute
     "/1/": {
       "filePath": "1/index.tsx"
     },
+    "/cv/": {
+      "filePath": "cv/index.tsx"
+    },
     "/_/articles/1": {
       "filePath": "_.articles/1.tsx",
-      "parent": "/_"
-    },
-    "/_/2/": {
-      "filePath": "_.2/index.tsx",
       "parent": "/_"
     }
   }
