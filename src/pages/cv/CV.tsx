@@ -165,7 +165,7 @@ const SummarySection = () => (
 			{"‎ "}
 		</Heading>
 
-		<Separator size="4" mb={{ initial: "6" }} />
+		<Separator size="4" mb="6" mt="4" />
 		<Heading
 			mt={{ initial: "4" }}
 			mb={{ initial: "6" }}
@@ -173,8 +173,7 @@ const SummarySection = () => (
 			size={{ initial: "4" }}
 			weight="regular"
 		>
-			A seasoned engineer with 10+ years of experience creating scalable
-			platforms and interactive applications for both web and mobile.
+			{faker.lorem.paragraphs({ min: 1, max: 3 })}
 		</Heading>
 		<Separator size="4" my={{ initial: "3" }} />
 		<Link color="gray" href="#" weight="medium" size="2">
@@ -195,23 +194,19 @@ const SummarySection = () => (
 const Experience = ({
 	getScrambleOffset,
 }: Partial<FlexProps> & { getScrambleOffset: () => number }) => (
-	<Flex direction={{ initial: "column" }}>
+	<Flex direction={{ initial: "column" }} mt={{ initial: "9", sm: "0" }}>
 		<Heading style={{ color: "var(--gray-11)" }} size="3">
 			Experience
 		</Heading>
-		<Separator size="4" mb={{ initial: "6" }} />
-
+		<Separator size="4" mb={{ initial: "6" }} mt="4" />
 		<ExperienceLine />
 		<Separator size="4" my={{ initial: "6" }} style={{ breakAfter: "avoid" }} />
 		<ExperienceLine />
 		<Separator size="4" my={{ initial: "6" }} style={{ breakAfter: "avoid" }} />
-
 		<ExperienceLine />
 		<Separator size="4" my={{ initial: "6" }} style={{ breakAfter: "avoid" }} />
-
 		<ExperienceLine />
 		<Separator size="4" my={{ initial: "6" }} style={{ breakAfter: "avoid" }} />
-
 		<ExperienceLine />
 	</Flex>
 );
@@ -244,13 +239,7 @@ export const CV = () => {
 	};
 
 	return (
-		<Flex
-			direction="column"
-			px={{ initial: "3", sm: "6" }}
-			py={{ initial: "9" }}
-			mx="6"
-			// className={styles.cv}
-		>
+		<Flex direction="column" px={{ initial: "3", sm: "6" }} py="9" mx="6">
 			<Flex direction="row" justify="between" align="start">
 				{/* Heading stuff ------------------------------------------------  */}
 				<Flex
@@ -296,7 +285,10 @@ export const CV = () => {
 				<Flex width={{ initial: "100%", sm: "50%" }}>
 					<SummarySection />
 				</Flex>
-				<Flex width={{ initial: "0px", sm: "6rem" }} />
+				<Flex
+					width={{ initial: "0px", sm: "6rem" }}
+					mt={{ initial: "9", sm: "0" }}
+				/>
 				<Flex width="100%">
 					<Experience getScrambleOffset={getScrambleOffset} />
 				</Flex>
