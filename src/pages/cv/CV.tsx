@@ -184,9 +184,15 @@ const SummarySection = () => (
 			LinkedIn
 		</Link>
 		<Separator size="4" my={{ initial: "3" }} />
-		<Link color="gray" href="#" weight="medium" size="2">
+		<Link
+			color="gray"
+			href="https://cal.com/nicholaswagner"
+			target="_blank"
+			weight="medium"
+			size="2"
+		>
 			{" "}
-			Schedule a Call
+			Book a Call
 		</Link>
 	</Flex>
 );
