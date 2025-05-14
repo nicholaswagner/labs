@@ -1,6 +1,6 @@
 import { Text } from "@radix-ui/themes";
 import type { TextProps } from "@radix-ui/themes";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import type { CSSProperties } from "react";
 import type { ScrambleOptions } from "../../hooks/useScrambleText";
 import { useScrambleText } from "../../hooks/useScrambleText";
@@ -34,12 +34,9 @@ export const ScrambleText = ({
 	...props
 }: Partial<TextProps> & Partial<ScrambleOptions>) => {
 	const ref = useRef<HTMLElement | null>(null);
-	const [duration, setDuration] = useState(defaults.duration);
-
 	const trigger = useScrambleText(ref, {
 		...defaults,
 		...props,
-		duration,
 	});
 
 	const { themeProps } = useTheme();
@@ -49,26 +46,6 @@ export const ScrambleText = ({
 		if (!ref.current || themeProps) return;
 		trigger();
 	}, [themeProps]);
-
-	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
-	useEffect(() => {
-		const handleBeforePrint = () => {
-			setDuration(0);
-		};
-
-		const handleAfterPrint = () => {
-			setDuration(defaults.duration);
-			if (ref.current) {
-				trigger();
-			}
-		};
-		window.addEventListener("beforeprint", handleBeforePrint);
-		window.addEventListener("afterprint", handleAfterPrint);
-		return () => {
-			window.removeEventListener("beforeprint", handleBeforePrint);
-			window.removeEventListener("afterprint", handleAfterPrint);
-		};
-	}, []);
 
 	useEffect(() => {
 		const observer = new IntersectionObserver(

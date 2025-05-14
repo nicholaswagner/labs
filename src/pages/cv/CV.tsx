@@ -231,29 +231,7 @@ const Experience = ({
 // );
 
 export const CV = () => {
-	// const [isPrinting, setIsPrinting] = useState(false);
 	const { theme } = useTheme();
-	// const themeRef = useRef(theme);
-
-	// useLayoutEffect(() => {
-	// 	const handleBeforePrint = () => {
-	// 		if (themeRef.current === "dark") {
-	// 			setTheme("light");
-	// 		}
-	// 	};
-
-	// 	const handleAfterPrint = () => {
-	// 		if (themeRef.current !== theme) {
-	// 			setTheme(themeRef.current);
-	// 		}
-	// 	};
-	// 	window.addEventListener("beforeprint", handleBeforePrint);
-	// 	window.addEventListener("afterprint", handleAfterPrint);
-	// 	return () => {
-	// 		window.removeEventListener("beforeprint", handleBeforePrint);
-	// 		window.removeEventListener("afterprint", handleAfterPrint);
-	// 	};
-	// }, [setTheme, theme]);
 
 	let x = 0;
 	const getScrambleOffset = () => {
@@ -269,7 +247,7 @@ export const CV = () => {
 		<Flex
 			direction="column"
 			px={{ initial: "3", sm: "6" }}
-			pt={{ initial: "8" }}
+			py={{ initial: "9" }}
 			mx="6"
 			// className={styles.cv}
 		>
