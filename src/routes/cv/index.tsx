@@ -1,6 +1,6 @@
-import { Lab002 } from "@/pages/02/02";
+import { CV } from "@/pages/cv/CV";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/cv/")({
-	component: Lab002,
+	component: CV,
 });

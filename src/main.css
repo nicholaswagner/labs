@@ -15,7 +15,6 @@
 }
 
 :root {
-	/* --transition-stuff: background-color 1.5s ease, color 1.5s ease; */
 	--transition-stuff: background-color 0.33s cubic-bezier(0.5, 1, 0.89, 1),
 		color 0.6s cubic-bezier(0.5, 1, 0.89, 1);
 }
@@ -27,12 +26,19 @@ html {
 body {
 	margin: 0;
 	padding: 0;
-	opacity: 0;
+	/* opacity: 0; */
 	transition: var(--transition-stuff);
-	/* transition: opacity 1.5s ease-out, color 1.6s ease-out; */
-	animation: triggerTransition 1.5s cubic-bezier(0.5, 1, 0.89, 1) forwards;
-	/* animation: triggerTransition 1.5s ease-in-out forwards; */
-	/* overflow: hidden; */
+	/* animation: triggerTransition 1.5s cubic-bezier(0.5, 1, 0.89, 1) forwards; */
+	/* animation: triggerTransition 1.5s cubic-bezier(0.5, 1, 0.89, 1) forwards; */
+
+	@media print {
+		height: 100%;
+		width: 100%;
+		opacity: 1;
+		transition: none;
+		margin: 0;
+		padding: 0;
+	}
 }
 
 .radix-themes {
@@ -45,7 +51,6 @@ body {
 	--heading-leading-trim-start: 0.42em;
 	--heading-leading-trim-end: 0.38em;
 	--heading-letter-spacing: -0.01em;
-
 	--cursor-button: pointer !important;
 	--cursor-checkbox: default;
 	--cursor-disabled: not-allowed;
@@ -55,6 +60,49 @@ body {
 	--cursor-slider-thumb: default;
 	--cursor-slider-thumb-active: default;
 	--cursor-switch: pointer !important;
+
+	@media print {
+		--scaling: 0.75;
+		--font-size-1: calc(8px * var(--scaling));
+		--font-size-2: calc(10px * var(--scaling));
+		--font-size-3: calc(12px * var(--scaling));
+		--font-size-4: calc(14px * var(--scaling));
+		--font-size-5: calc(16px * var(--scaling));
+		--font-size-6: calc(20px * var(--scaling));
+		--font-size-7: calc(24px * var(--scaling));
+		--font-size-8: calc(31px * var(--scaling));
+		--font-size-9: calc(56px * var(--scaling));
+
+		--line-height-1: calc(12px * var(--scaling));
+		--line-height-2: calc(16px * var(--scaling));
+		--line-height-3: calc(20px * var(--scaling));
+		--line-height-4: calc(22px * var(--scaling));
+		--line-height-5: calc(24px * var(--scaling));
+		--line-height-6: calc(26px * var(--scaling));
+		--line-height-7: calc(32px * var(--scaling));
+		--line-height-8: calc(36px * var(--scaling));
+		--line-height-9: calc(56px * var(--scaling));
+
+		--space-1: calc(2px * var(--scaling));
+		--space-2: calc(4px * var(--scaling));
+		--space-3: calc(8px * var(--scaling));
+		--space-4: calc(12px * var(--scaling));
+		--space-5: calc(20px * var(--scaling));
+		--space-6: calc(28px * var(--scaling));
+		--space-7: calc(36px * var(--scaling));
+		--space-8: calc(44px * var(--scaling));
+		--space-9: calc(60px * var(--scaling));
+
+		--heading-line-height-1: calc(12px * var(--scaling));
+		--heading-line-height-2: calc(14px * var(--scaling));
+		--heading-line-height-3: calc(18px * var(--scaling));
+		--heading-line-height-4: calc(20px * var(--scaling));
+		--heading-line-height-5: calc(22px * var(--scaling));
+		--heading-line-height-6: calc(26px * var(--scaling));
+		--heading-line-height-7: calc(32px * var(--scaling));
+		--heading-line-height-8: calc(36px * var(--scaling));
+		--heading-line-height-9: calc(56px * var(--scaling));
+	}
 }
 
 img {

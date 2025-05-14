@@ -17,6 +17,7 @@ import { Route as CvIndexImport } from './routes/cv/index'
 import { Route as R1IndexImport } from './routes/1/index'
 import { Route as TempSplatImport } from './routes/temp/$'
 import { Route as Bos04Import } from './routes/bos/04'
+import { Route as LeetcodeIndexImport } from './routes/_.leetcode/index'
 import { Route as Articles1Import } from './routes/_.articles/1'
 
 // Create/Update Routes
@@ -54,6 +55,12 @@ const Bos04Route = Bos04Import.update({
   id: '/bos/04',
   path: '/bos/04',
   getParentRoute: () => rootRoute,
+} as any)
+
+const LeetcodeIndexRoute = LeetcodeIndexImport.update({
+  id: '/leetcode/',
+  path: '/leetcode/',
+  getParentRoute: () => Route,
 } as any)
 
 const Articles1Route = Articles1Import.update({
@@ -115,6 +122,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Articles1Import
       parentRoute: typeof rootRoute
     }
+    '/_/leetcode/': {
+      id: '/_/leetcode/'
+      path: '/leetcode'
+      fullPath: '/leetcode'
+      preLoaderRoute: typeof LeetcodeIndexImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -122,10 +136,12 @@ declare module '@tanstack/react-router' {
 
 interface RouteChildren {
   Articles1Route: typeof Articles1Route
+  LeetcodeIndexRoute: typeof LeetcodeIndexRoute
 }
 
 const RouteChildren: RouteChildren = {
   Articles1Route: Articles1Route,
+  LeetcodeIndexRoute: LeetcodeIndexRoute,
 }
 
 const RouteWithChildren = Route._addFileChildren(RouteChildren)
@@ -138,6 +154,7 @@ export interface FileRoutesByFullPath {
   '/1': typeof R1IndexRoute
   '/cv': typeof CvIndexRoute
   '/articles/1': typeof Articles1Route
+  '/leetcode': typeof LeetcodeIndexRoute
 }
 
 export interface FileRoutesByTo {
@@ -148,6 +165,7 @@ export interface FileRoutesByTo {
   '/1': typeof R1IndexRoute
   '/cv': typeof CvIndexRoute
   '/articles/1': typeof Articles1Route
+  '/leetcode': typeof LeetcodeIndexRoute
 }
 
 export interface FileRoutesById {
@@ -159,13 +177,30 @@ export interface FileRoutesById {
   '/1/': typeof R1IndexRoute
   '/cv/': typeof CvIndexRoute
   '/_/articles/1': typeof Articles1Route
+  '/_/leetcode/': typeof LeetcodeIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/$' | '' | '/bos/04' | '/temp/$' | '/1' | '/cv' | '/articles/1'
+  fullPaths:
+    | '/$'
+    | ''
+    | '/bos/04'
+    | '/temp/$'
+    | '/1'
+    | '/cv'
+    | '/articles/1'
+    | '/leetcode'
   fileRoutesByTo: FileRoutesByTo
-  to: '/$' | '' | '/bos/04' | '/temp/$' | '/1' | '/cv' | '/articles/1'
+  to:
+    | '/$'
+    | ''
+    | '/bos/04'
+    | '/temp/$'
+    | '/1'
+    | '/cv'
+    | '/articles/1'
+    | '/leetcode'
   id:
     | '__root__'
     | '/$'
@@ -175,6 +210,7 @@ export interface FileRouteTypes {
     | '/1/'
     | '/cv/'
     | '/_/articles/1'
+    | '/_/leetcode/'
   fileRoutesById: FileRoutesById
 }
 
@@ -220,7 +256,8 @@ export const routeTree = rootRoute
     "/_": {
       "filePath": "_.tsx",
       "children": [
-        "/_/articles/1"
+        "/_/articles/1",
+        "/_/leetcode/"
       ]
     },
     "/bos/04": {
@@ -237,6 +274,10 @@ export const routeTree = rootRoute
     },
     "/_/articles/1": {
       "filePath": "_.articles/1.tsx",
+      "parent": "/_"
+    },
+    "/_/leetcode/": {
+      "filePath": "_.leetcode/index.tsx",
       "parent": "/_"
     }
   }

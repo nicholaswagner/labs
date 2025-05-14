@@ -58,3 +58,35 @@
 	-webkit-perspective: 300px;
 	perspective: 300px;
 }
+
+.experienceList {
+	margin-block-start: 0;
+	padding-inline-start: "1rem";
+	li {
+		margin-bottom: 0.75rem;
+	}
+
+	@media print {
+		li {
+			margin-bottom: 0.3rem;
+			break-inside: avoid;
+		}
+	}
+}
+
+.printable {
+	display: none;
+	@media print {
+		display: flex;
+	}
+}
+.notPrintable {
+	display: flex;
+	@media print {
+		display: none;
+	}
+}
+
+.experienceBlock {
+	break-inside: avoid;
+}
